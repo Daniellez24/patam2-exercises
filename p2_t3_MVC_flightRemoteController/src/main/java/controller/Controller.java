@@ -6,6 +6,7 @@ import view.WindowController;
 import java.util.Observable;
 import java.util.Observer;
 
+// the controller tells the plane what to do, using the model who connects with the simulator
 public class Controller implements Observer {
 
     Model m;
@@ -19,18 +20,11 @@ public class Controller implements Observer {
         wc.addObserver(this);
     }
 
-
     @Override
     public void update(Observable o, Object arg) {
-        // if the update came from the model, we'll check its result
-        if(o==m){
-            int result = m.getResult();
-            wc.display(result);
-        }
-        else{
-            if(o==wc){
-                m.calculate();
-            }
-        }
+        // the update always comes from the view (WindowController), to the model.
+        // so we don't have to check which Observable sent a changes notification
+        m.setAileron(wc.getAileron());
+        m.setElevators(wc.getElevator());
     }
 }

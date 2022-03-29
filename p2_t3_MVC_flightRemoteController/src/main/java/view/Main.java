@@ -18,8 +18,9 @@ public class Main extends Application {
             BorderPane root = fxml.load(getClass().getResource("Window.fxml").openStream());
             //the view class(WindowController) doesn't know the Model and the Controller, because of the Observer design pattern
             WindowController wc = fxml.getController(); // view
+            wc.paint();
             // the model doesn't know the controller and the view
-            Model m = new Model(); // model
+            Model m = new Model("properties.txt"); // model
             Controller c = new Controller(m, wc); // controller
 
             Scene scene = new Scene(root, 300, 300);

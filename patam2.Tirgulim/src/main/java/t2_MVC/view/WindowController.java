@@ -14,13 +14,13 @@ public class WindowController extends Observable {
         System.out.println("hello world");
     }
 
-    public void generate(){
+    public void generate() {
         setChanged();
         notifyObservers();
     }
 
     // display the result in the label "result" with the fx:id "resultLabel"
     public void display(int result) {
-        resultLabel.textProperty().set(""+result);
+        resultLabel.textProperty().set("" + result);
     }
 }

@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        try {
+        try{
             FXMLLoader fxml = new FXMLLoader();
             BorderPane root = fxml.load(getClass().getResource("Window.fxml").openStream());
             //the view class(WindowController) doesn't know the Model and the Controller, because of the Observer design pattern
@@ -27,7 +27,8 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.show();
 
-        } catch (Exception e) {
+        }
+        catch(Exception e){
             e.printStackTrace();
         }
     }

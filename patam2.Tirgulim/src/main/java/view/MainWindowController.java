@@ -16,17 +16,17 @@ import java.util.ResourceBundle;
 public class MainWindowController implements Initializable {
 
     int[][] mazeData = {
-            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            {1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1},
-            {1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1},
-            {1,0,1,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,1},
-            {1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1},
-            {1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1},
-            {1,0,1,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,1},
-            {1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1},
-            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1},
-            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1}
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+            {1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+            {1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+            {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1}
     };
 
     // initialization of this object mazeDisplayer of type MazeDisplayer here happens in the fxml file
@@ -47,7 +47,7 @@ public class MainWindowController implements Initializable {
         mazeDisplayer.setMazeData(mazeData);
 
         // request focus on the maze itself and not the start/stop buttons (so we can move the Character with the arrows keys)
-        mazeDisplayer.addEventFilter(MouseEvent.MOUSE_CLICKED, (e)->mazeDisplayer.requestFocus());
+        mazeDisplayer.addEventFilter(MouseEvent.MOUSE_CLICKED, (e) -> mazeDisplayer.requestFocus());
 
         mazeDisplayer.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -55,17 +55,17 @@ public class MainWindowController implements Initializable {
                 int r = mazeDisplayer.getcRow();
                 int c = mazeDisplayer.getcCol();
 
-                if(event.getCode() == KeyCode.UP){
-                    mazeDisplayer.setCharacterPosition(r-1, c);
+                if (event.getCode() == KeyCode.UP) {
+                    mazeDisplayer.setCharacterPosition(r - 1, c);
                 }
-                if(event.getCode() == KeyCode.DOWN){
-                    mazeDisplayer.setCharacterPosition(r+1, c);
+                if (event.getCode() == KeyCode.DOWN) {
+                    mazeDisplayer.setCharacterPosition(r + 1, c);
                 }
-                if(event.getCode() == KeyCode.RIGHT){
-                    mazeDisplayer.setCharacterPosition(r, c+1);
+                if (event.getCode() == KeyCode.RIGHT) {
+                    mazeDisplayer.setCharacterPosition(r, c + 1);
                 }
-                if(event.getCode() == KeyCode.LEFT){
-                    mazeDisplayer.setCharacterPosition(r, c-1);
+                if (event.getCode() == KeyCode.LEFT) {
+                    mazeDisplayer.setCharacterPosition(r, c - 1);
                 }
 
             }
@@ -73,11 +73,11 @@ public class MainWindowController implements Initializable {
     }
 
 
-    public void start(){
+    public void start() {
         System.out.println("start");
     }
 
-    public void openFile(){
+    public void openFile() {
         FileChooser fc = new FileChooser();
         fc.setTitle("open maze file");
         // setting default directory when opening the "open file" dialogue
@@ -90,7 +90,7 @@ public class MainWindowController implements Initializable {
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("all files", "*.*"));
 
         File chosen = fc.showOpenDialog(null); // need to fix null
-        if(chosen != null){
+        if (chosen != null) {
             System.out.println(chosen.getName());
         }
     }

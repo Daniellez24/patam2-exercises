@@ -58,15 +58,15 @@ public class MazeDisplayer extends Canvas {
     }
 
     // re draw the maze everytime it is changed
-    public void redraw(){
-        if(mazeData != null){
+    public void redraw() {
+        if (mazeData != null) {
             // get size of the canvas
             double W = getWidth();
             double H = getHeight();
             // w,h are relative width and height of each cell in the maze (relative to W,H)
-            double w,h;
-            w =  W/ mazeData[0].length;
-            h =  H/mazeData.length;
+            double w, h;
+            w = W / mazeData[0].length;
+            h = H / mazeData.length;
 
             GraphicsContext gc = getGraphicsContext2D();
             Image wall = null;
@@ -78,19 +78,18 @@ public class MazeDisplayer extends Canvas {
 
             // clear all the maze, and redraw it so the Character Oval will be deleted from its previous position
             // and redrawn in the new position
-            gc.clearRect(0,0,W,H);
+            gc.clearRect(0, 0, W, H);
 
             // i = lines, j = columns
             for (int i = 0; i < mazeData.length; i++) {
                 for (int j = 0; j < mazeData[i].length; j++) {
-                    if(mazeData[i][j] != 0){
-                        if(wall == null){
+                    if (mazeData[i][j] != 0) {
+                        if (wall == null) {
                             // fillRect fills rectangles with the given measurements, the default fill color is black
-                            gc.fillRect(j*w,i*h,w,h);
-                        }
-                        else{
+                            gc.fillRect(j * w, i * h, w, h);
+                        } else {
                             // paints the walls with the wall Image, if it's not null
-                            gc.drawImage(wall, j*w,i*h,w,h);
+                            gc.drawImage(wall, j * w, i * h, w, h);
                         }
 
                     }
@@ -98,7 +97,7 @@ public class MazeDisplayer extends Canvas {
             }
             // paint Character
             gc.setFill(Color.RED);
-            gc.fillOval(cCol*w, cRow*h, w, h);
+            gc.fillOval(cCol * w, cRow * h, w, h);
 
         }
     }

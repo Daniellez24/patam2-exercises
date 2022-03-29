@@ -23,12 +23,11 @@ public class Controller implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         // if the update came from the model, we'll check its result
-        if(o==m){
+        if (o == m) {
             int result = m.getResult();
             wc.display(result);
-        }
-        else{
-            if(o==wc){
+        } else {
+            if (o == wc) {
                 m.calculate();
             }
         }

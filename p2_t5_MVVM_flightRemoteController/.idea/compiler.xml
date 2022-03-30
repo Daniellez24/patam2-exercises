@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="p2_t5_MVVM_flightRemoteController" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="p2_t5_MVVM_flightRemoteController" target="15" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

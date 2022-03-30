@@ -1,17 +1,31 @@
 package view;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
+import view_model.ViewModel;
 
 import java.util.Observable;
 
-// the view paints the virtual Joystick
-public class WindowController extends Observable {
+/** the view paints the virtual Joystick. the view binds its attributes to the attributes of the viewModel.
+ *  the view will have a ViewModel object, and this way the view can give orders to the viewModel by the binding */
+public class WindowController {
 
     @FXML
     Canvas joystick;
+    @FXML
+    Slider throttle;
+    @FXML
+    Slider rudder;
+
+    DoubleProperty aileron, elevators;
+
+    ViewModel vm;
+
     // mouse clicked or released
     boolean mousePushed;
     // to show mouse move on joystick
@@ -19,22 +33,27 @@ public class WindowController extends Observable {
     // middle of canvas x,y
     double mx, my;
 
-    double aileron, elevator;
 
     public WindowController(){
         mousePushed = false;
         jx = 0;
         jy = 0;
-        aileron = 0;
-        elevator = 0;
+        aileron = new SimpleDoubleProperty();
+        elevators = new SimpleDoubleProperty();
     }
 
-    public double getAileron() {
-        return aileron;
-    }
-
-    public double getElevator() {
-        return elevator;
+    void init(ViewModel vm){
+        this.vm = vm;
+        /** whenever the throttle Slider changes - the viewModel's throttle changes.
+         * and whenever the viewModel's throttle changes -
+         * its Listener (which was added in the ViewModel) changes the Model (m.setThrottle)
+         * and the Model sends the right command to the simulator (with setThrottle method).
+         * view changes -> ViewModel changes -> Model changes -> simulator changes */
+        vm.throttle.bind(throttle.valueProperty());
+        vm.rudder.bind(rudder.valueProperty());
+        vm.aileron.bind(aileron);
+        vm.elevators.bind(elevators);
+        // the viewModel's attributes are bound to the View's (WindowController) attributes
     }
 
     void paint(){
@@ -54,19 +73,16 @@ public class WindowController extends Observable {
         and we might get values bigger/smaller than 1,-1.
         this can be fixed by taking the max/min value between 1,-1 and the (jx-mx)/mx and (jy-my)/my.
         the aileron moves on the X's, and the elevator on the Y's */
-        aileron = (jx-mx)/mx;
-        elevator = (jy-my)/my;
-        // notify changes to the controller (the observer)
-        setChanged();
-        notifyObservers();
-        System.out.println(aileron+","+elevator);
-
+        /** whenever we call the set method of the aileron/elevators (aileron.set(..)),
+         * whoever is bound to them will update itself to the new value that was set */
+        aileron.set((jx-mx)/mx);
+        elevators.set((my-jy)/my);
     }
 
     public void mouseDown(MouseEvent me){
         if(!mousePushed){
             mousePushed = true;
-            System.out.println("mouse is down");
+//            System.out.println("mouse is down");
         }
     }
 
@@ -74,7 +90,7 @@ public class WindowController extends Observable {
     public void mouseUp(MouseEvent me){
         if(mousePushed){
             mousePushed = false;
-            System.out.println("mouse is up");
+//            System.out.println("mouse is up");
             // return the joystick to the middle on mouse up
             jx = mx;
             jy = my;

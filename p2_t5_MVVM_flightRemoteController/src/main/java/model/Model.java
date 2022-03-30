@@ -5,6 +5,9 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Observable;
 
+/* ATTENTION! the model in MVVM stays the same as it was in MVC. no need to change it, behaves the same.
+* in this program, nothing comes from the model that it has to notify about - therefore no changes are needed */
+
 // the model connects with the flight simulator
 // the model will read the properties from the properties.txt file
 public class Model extends Observable {
